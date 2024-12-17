@@ -73,6 +73,8 @@ namespace PROYECTO_5TO_SEMESTRE
 
         }
 
+        
+
 
         private void MecanicoForm_Load(object sender, EventArgs e)
         {
@@ -84,6 +86,39 @@ namespace PROYECTO_5TO_SEMESTRE
             CargarEstatusVendido();
             CargarMantenimientoVendido(); 
             CargarVehiculosVendido();
+            CargarMantenimientosVehiculosVendidos();
+        }
+
+        private void CargarVehiculosVendido()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    // Modificamos la consulta para buscar vehículos vendidos con estatus '1' (vendidos)
+                    string query = @"
+                SELECT v.id_vehiculo, v.nombre
+                FROM Vehiculo v
+                WHERE EXISTS (
+                    SELECT 1 FROM Venta ve WHERE ve.id_vehiculo = v.id_vehiculo AND ve.estatus = 1
+                )";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    dataAdapter.Fill(dt);
+
+                    // Llenar el ComboBox de vehículos vendidos
+                    comboBoxVehiculosVendidoOs.DataSource = dt;
+                    comboBoxVehiculosVendidoOs.DisplayMember = "nombre";
+                    comboBoxVehiculosVendidoOs.ValueMember = "id_vehiculo";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar vehículos vendidos: " + ex.Message);
+            }
         }
 
         private void CargarEstatus()
@@ -98,6 +133,40 @@ namespace PROYECTO_5TO_SEMESTRE
         }
 
 
+        private void CargarMantenimientosVehiculosVendidos()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // Consulta para obtener los mantenimientos de los vehículos vendidos
+                    string query = @"
+                SELECT m.id_mantenimiento, m.id_vehiculo, v.nombre AS vehiculo, 
+                       m.id_mantenimiento_tipo, mt.nombre AS mantenimiento_tipo, 
+                       m.fecha_inicio, m.fecha_proximo_mantenimiento, 
+                       m.estatus
+                FROM Mantenimiento m
+                JOIN Vehiculo v ON m.id_vehiculo = v.id_vehiculo
+                JOIN MantenimientoTipo mt ON m.id_mantenimiento_tipo = mt.id_mantenimiento_tipo
+                JOIN Venta ve ON v.id_vehiculo = ve.id_vehiculo
+                WHERE ve.estatus = 1";  // Solo los vehículos vendidos (estatus = 1)
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    dataAdapter.Fill(dt);
+
+                    // Llenar el DataGridView con los resultados
+                    dataGridViewMantenimientosVendidos.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los mantenimientos de vehículos vendidos: " + ex.Message);
+            }
+        }
 
 
 
@@ -120,9 +189,9 @@ namespace PROYECTO_5TO_SEMESTRE
                     dataAdapter.Fill(dt);
 
                     // Llenar el ComboBox de vehículos
-                    comboBoxVehiculos.DataSource = dt;
-                    comboBoxVehiculos.DisplayMember = "nombre";
-                    comboBoxVehiculos.ValueMember = "id_vehiculo";
+                    comboBoxVehiculosVendidos.DataSource = dt;
+                    comboBoxVehiculosVendidos.DisplayMember = "nombre";
+                    comboBoxVehiculosVendidos.ValueMember = "id_vehiculo";
                 }
             }
             catch (Exception ex)
@@ -162,7 +231,7 @@ namespace PROYECTO_5TO_SEMESTRE
             try
             {
                 // Obtener los valores seleccionados del formulario
-                int idVehiculo = (int)comboBoxVehiculos.SelectedValue;
+                int idVehiculo = (int)comboBoxVehiculosVendidos.SelectedValue;
                 int idMantenimientoTipo = (int)comboBoxMantenimientoTipo.SelectedValue;
                 int idEmpleado = SessionData.currentUserId; // ID del empleado que está registrado
                 DateTime fechaInicio = dateTimePickerInicio.Value;
@@ -234,7 +303,7 @@ namespace PROYECTO_5TO_SEMESTRE
                 }
 
                 // Obtener los valores modificados del formulario
-                int idVehiculo = (int)comboBoxVehiculos.SelectedValue;
+                int idVehiculo = (int)comboBoxVehiculosVendidos.SelectedValue;
                 int idMantenimientoTipo = (int)comboBoxMantenimientoTipo.SelectedValue;
                 int idEmpleado = SessionData.currentUserId; // El ID del empleado que está registrado
                 DateTime fechaInicio = dateTimePickerInicio.Value;
@@ -298,7 +367,7 @@ namespace PROYECTO_5TO_SEMESTRE
                 DataGridViewRow row = dataGridViewMantenimiento.SelectedRows[0];
 
                 // Cargar los valores de la fila seleccionada en los controles
-                comboBoxVehiculos.SelectedValue = row.Cells["id_vehiculo"].Value;
+                comboBoxVehiculosVendidos.SelectedValue = row.Cells["id_vehiculo"].Value;
                 comboBoxMantenimientoTipo.SelectedValue = row.Cells["id_mantenimiento_tipo"].Value;
                 dateTimePickerInicio.Value = (DateTime)row.Cells["fecha_inicio"].Value;
                 dateTimePickerProximoMantenimiento.Value = (DateTime)row.Cells["fecha_proximo_mantenimiento"].Value;
@@ -349,40 +418,15 @@ namespace PROYECTO_5TO_SEMESTRE
             }
         }
 
-        private void CargarVehiculosVendido()
-        {
-            try
-            {
-                // Conectar a la base de datos
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
+       
 
-                    // Consultar los vehículos vendidos
-                    string query = "SELECT id_vehiculo, nombre FROM Vehiculo WHERE vendido = 1";  // Filtramos los vehículos vendidos
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    dataAdapter.Fill(dt);
-
-                    // Llenar el ComboBox de vehículos
-                    comboBoxVehiculosVendido.DataSource = dt;
-                    comboBoxVehiculosVendido.DisplayMember = "nombre";
-                    comboBoxVehiculosVendido.ValueMember = "id_vehiculo";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar vehículos: " + ex.Message);
-            }
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 // Obtener los valores seleccionados del formulario
-                int idVehiculo = (int)comboBoxVehiculosVendido.SelectedValue;
+                int idVehiculo = (int)comboBoxVehiculosVendidoOs.SelectedValue;
                 int idMantenimientoTipo = (int)comboBoxMantenimientoTipoVendido.SelectedValue;
                 int idEmpleado = SessionData.currentUserId; // ID del empleado que está registrado
                 DateTime fechaInicio = dateTimePickerProximoMantenimientoVendido.Value;
@@ -437,6 +481,93 @@ namespace PROYECTO_5TO_SEMESTRE
             catch (Exception ex)
             {
                 MessageBox.Show("Error al agregar el mantenimiento: " + ex.Message);
+            }
+        }
+
+        private void dataGridViewMantenimientosVendidos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewMantenimientosVendidos.SelectedRows.Count > 0)
+            {
+                // Obtener la fila seleccionada
+                DataGridViewRow row = dataGridViewMantenimientosVendidos.SelectedRows[0];
+
+                // Cargar los valores de la fila seleccionada en los controles
+                comboBoxVehiculosVendidos.SelectedValue = row.Cells["id_vehiculo"].Value;
+                comboBoxMantenimientoTipo.SelectedValue = row.Cells["id_mantenimiento_tipo"].Value;
+                dateTimePickerProximoMantenimientoVendido.Value = (DateTime)row.Cells["fecha_inicio"].Value;
+                dateTimePicker1.Value = (DateTime)row.Cells["fecha_proximo_mantenimiento"].Value;
+
+                // Establecer el estatus en el ComboBox (En progreso o Terminado)
+                var estatusValue = row.Cells["estatus"].Value;
+                if (estatusValue != DBNull.Value)
+                {
+                    int estatus = Convert.ToInt32(estatusValue);  // Usamos Convert.ToInt32 para manejar correctamente el tipo de datos
+                    comboBoxEstatusVendido.SelectedIndex = estatus == 1 ? 0 : 1; // Asume 1 -> "En progreso", 0 -> "Terminado"
+                }
+                else
+                {
+                    // Si estatus es DBNull o no está disponible, se puede manejar de otra forma
+                    comboBoxEstatusVendido.SelectedIndex = -1; // O cualquier valor predeterminado
+                }
+
+                // Guardar el ID del mantenimiento seleccionado (esto nos ayudará para la actualización)
+                label3.Text = row.Cells["id_mantenimiento"].Value.ToString();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtener los valores seleccionados de los controles
+                int idMantenimiento = int.Parse(label3.Text); // ID del mantenimiento
+                int idVehiculo = (int)comboBoxVehiculosVendidos.SelectedValue;
+                int idMantenimientoTipo = (int)comboBoxMantenimientoTipo.SelectedValue;
+                DateTime fechaInicio = dateTimePickerProximoMantenimientoVendido.Value;
+                DateTime fechaProximoMantenimiento = dateTimePicker1.Value;
+
+                // Obtener el estatus
+                int estatus = (int)((dynamic)comboBoxEstatusVendido.SelectedItem).Value;
+
+                // Verificar que todos los datos estén completos
+                if (idVehiculo > 0 && idMantenimientoTipo > 0)
+                {
+                    // Actualizar el mantenimiento en la base de datos
+                    string query = "UPDATE Mantenimiento " +
+                                   "SET id_vehiculo = @idVehiculo, id_mantenimiento_tipo = @idMantenimientoTipo, " +
+                                   "fecha_inicio = @fechaInicio, fecha_proximo_mantenimiento = @fechaProximoMantenimiento, " +
+                                   "estatus = @estatus, id_modificacion = @idEmpleado, fecha_modificacion = GETDATE() " +
+                                   "WHERE id_mantenimiento = @idMantenimiento";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@idVehiculo", idVehiculo);
+                        cmd.Parameters.AddWithValue("@idMantenimientoTipo", idMantenimientoTipo);
+                        cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                        cmd.Parameters.AddWithValue("@fechaProximoMantenimiento", fechaProximoMantenimiento);
+                        cmd.Parameters.AddWithValue("@estatus", estatus);
+                        cmd.Parameters.AddWithValue("@idEmpleado", SessionData.currentUserId); // Usamos el ID del empleado actual
+                        cmd.Parameters.AddWithValue("@idMantenimiento", idMantenimiento);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
+                        MessageBox.Show("Mantenimiento actualizado exitosamente.");
+
+                        // Actualizar el DataGridView
+                        CargarMantenimientosVehiculosVendidos();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, complete todos los campos correctamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar el mantenimiento: " + ex.Message);
             }
         }
     }

@@ -29,8 +29,24 @@ namespace PROYECTO_5TO_SEMESTRE
 
 
 
-        // Definir la cadena de conexión aquí
-        private string connectionString = "Data Source=eduardomv\\SQLEXPRESS;Initial Catalog=TESTING_DB;Integrated Security=True";
+        private string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=TESTING_DB;Integrated Security=True";
+
+        private void TestConnection()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    MessageBox.Show("Conexión exitosa a la base de datos.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con la base de datos: " + ex.Message);
+            }
+        }
+
 
         // Método para encriptar la contraseña utilizando SHA256
         private string EncriptarContraseña(string contraseña)

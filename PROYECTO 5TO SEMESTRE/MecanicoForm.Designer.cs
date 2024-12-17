@@ -30,20 +30,19 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridViewMantenimiento = new System.Windows.Forms.DataGridView();
-            this.comboBoxVehiculos = new System.Windows.Forms.ComboBox();
-            this.vehiculo = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxMantenimientoTipo = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerInicio = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerProximoMantenimiento = new System.Windows.Forms.DateTimePicker();
-            this.button2 = new System.Windows.Forms.Button();
+            this.labelIdMantenimiento = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxEstatus = new System.Windows.Forms.ComboBox();
-            this.labelIdMantenimiento = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.dateTimePickerProximoMantenimiento = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerInicio = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxMantenimientoTipo = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.vehiculo = new System.Windows.Forms.Label();
+            this.comboBoxVehiculosVendidos = new System.Windows.Forms.ComboBox();
+            this.dataGridViewMantenimiento = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxEstatusVendido = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -53,13 +52,14 @@
             this.comboBoxMantenimientoTipoVendido = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBoxVehiculosVendido = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBoxVehiculosVendidoOs = new System.Windows.Forms.ComboBox();
+            this.dataGridViewMantenimientosVendidos = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMantenimiento)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMantenimientosVendidos)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -84,7 +84,7 @@
             this.tabPage1.Controls.Add(this.comboBoxMantenimientoTipo);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.vehiculo);
-            this.tabPage1.Controls.Add(this.comboBoxVehiculos);
+            this.tabPage1.Controls.Add(this.comboBoxVehiculosVendidos);
             this.tabPage1.Controls.Add(this.dataGridViewMantenimiento);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -94,104 +94,15 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // labelIdMantenimiento
             // 
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.comboBoxEstatusVendido);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.dateTimePicker1);
-            this.tabPage2.Controls.Add(this.dateTimePickerProximoMantenimientoVendido);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.comboBoxMantenimientoTipoVendido);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.comboBoxVehiculosVendido);
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1228, 560);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewMantenimiento
-            // 
-            this.dataGridViewMantenimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMantenimiento.Location = new System.Drawing.Point(530, 48);
-            this.dataGridViewMantenimiento.Name = "dataGridViewMantenimiento";
-            this.dataGridViewMantenimiento.Size = new System.Drawing.Size(692, 476);
-            this.dataGridViewMantenimiento.TabIndex = 0;
-            this.dataGridViewMantenimiento.SelectionChanged += new System.EventHandler(this.dataGridViewMantenimiento_SelectionChanged);
-            // 
-            // comboBoxVehiculos
-            // 
-            this.comboBoxVehiculos.FormattingEnabled = true;
-            this.comboBoxVehiculos.Location = new System.Drawing.Point(18, 76);
-            this.comboBoxVehiculos.Name = "comboBoxVehiculos";
-            this.comboBoxVehiculos.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxVehiculos.TabIndex = 1;
-            // 
-            // vehiculo
-            // 
-            this.vehiculo.AutoSize = true;
-            this.vehiculo.Location = new System.Drawing.Point(15, 60);
-            this.vehiculo.Name = "vehiculo";
-            this.vehiculo.Size = new System.Drawing.Size(35, 13);
-            this.vehiculo.TabIndex = 2;
-            this.vehiculo.Text = "label1";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(141, 442);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 55);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 117);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "label1";
-            // 
-            // comboBoxMantenimientoTipo
-            // 
-            this.comboBoxMantenimientoTipo.FormattingEnabled = true;
-            this.comboBoxMantenimientoTipo.Location = new System.Drawing.Point(18, 133);
-            this.comboBoxMantenimientoTipo.Name = "comboBoxMantenimientoTipo";
-            this.comboBoxMantenimientoTipo.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxMantenimientoTipo.TabIndex = 4;
-            // 
-            // dateTimePickerInicio
-            // 
-            this.dateTimePickerInicio.Location = new System.Drawing.Point(18, 222);
-            this.dateTimePickerInicio.Name = "dateTimePickerInicio";
-            this.dateTimePickerInicio.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerInicio.TabIndex = 6;
-            // 
-            // dateTimePickerProximoMantenimiento
-            // 
-            this.dateTimePickerProximoMantenimiento.Location = new System.Drawing.Point(277, 222);
-            this.dateTimePickerProximoMantenimiento.Name = "dateTimePickerProximoMantenimiento";
-            this.dateTimePickerProximoMantenimiento.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerProximoMantenimiento.TabIndex = 7;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(277, 442);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 55);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.labelIdMantenimiento.AutoSize = true;
+            this.labelIdMantenimiento.Location = new System.Drawing.Point(219, 337);
+            this.labelIdMantenimiento.Name = "labelIdMantenimiento";
+            this.labelIdMantenimiento.Size = new System.Drawing.Size(35, 13);
+            this.labelIdMantenimiento.TabIndex = 11;
+            this.labelIdMantenimiento.Text = "label3";
+            this.labelIdMantenimiento.Visible = false;
             // 
             // label2
             // 
@@ -210,25 +121,104 @@
             this.comboBoxEstatus.Size = new System.Drawing.Size(121, 21);
             this.comboBoxEstatus.TabIndex = 9;
             // 
-            // labelIdMantenimiento
+            // button2
             // 
-            this.labelIdMantenimiento.AutoSize = true;
-            this.labelIdMantenimiento.Location = new System.Drawing.Point(414, 292);
-            this.labelIdMantenimiento.Name = "labelIdMantenimiento";
-            this.labelIdMantenimiento.Size = new System.Drawing.Size(35, 13);
-            this.labelIdMantenimiento.TabIndex = 11;
-            this.labelIdMantenimiento.Text = "label3";
-            this.labelIdMantenimiento.Visible = false;
+            this.button2.Location = new System.Drawing.Point(277, 442);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(113, 55);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label3
+            // dateTimePickerProximoMantenimiento
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(410, 286);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "label3";
-            this.label3.Visible = false;
+            this.dateTimePickerProximoMantenimiento.Location = new System.Drawing.Point(277, 222);
+            this.dateTimePickerProximoMantenimiento.Name = "dateTimePickerProximoMantenimiento";
+            this.dateTimePickerProximoMantenimiento.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerProximoMantenimiento.TabIndex = 7;
+            // 
+            // dateTimePickerInicio
+            // 
+            this.dateTimePickerInicio.Location = new System.Drawing.Point(18, 222);
+            this.dateTimePickerInicio.Name = "dateTimePickerInicio";
+            this.dateTimePickerInicio.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerInicio.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 117);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
+            // 
+            // comboBoxMantenimientoTipo
+            // 
+            this.comboBoxMantenimientoTipo.FormattingEnabled = true;
+            this.comboBoxMantenimientoTipo.Location = new System.Drawing.Point(18, 133);
+            this.comboBoxMantenimientoTipo.Name = "comboBoxMantenimientoTipo";
+            this.comboBoxMantenimientoTipo.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxMantenimientoTipo.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(141, 442);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(113, 55);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // vehiculo
+            // 
+            this.vehiculo.AutoSize = true;
+            this.vehiculo.Location = new System.Drawing.Point(15, 60);
+            this.vehiculo.Name = "vehiculo";
+            this.vehiculo.Size = new System.Drawing.Size(35, 13);
+            this.vehiculo.TabIndex = 2;
+            this.vehiculo.Text = "label1";
+            // 
+            // comboBoxVehiculosVendidos
+            // 
+            this.comboBoxVehiculosVendidos.FormattingEnabled = true;
+            this.comboBoxVehiculosVendidos.Location = new System.Drawing.Point(18, 76);
+            this.comboBoxVehiculosVendidos.Name = "comboBoxVehiculosVendidos";
+            this.comboBoxVehiculosVendidos.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVehiculosVendidos.TabIndex = 1;
+            // 
+            // dataGridViewMantenimiento
+            // 
+            this.dataGridViewMantenimiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMantenimiento.Location = new System.Drawing.Point(530, 48);
+            this.dataGridViewMantenimiento.Name = "dataGridViewMantenimiento";
+            this.dataGridViewMantenimiento.Size = new System.Drawing.Size(692, 476);
+            this.dataGridViewMantenimiento.TabIndex = 0;
+            this.dataGridViewMantenimiento.SelectionChanged += new System.EventHandler(this.dataGridViewMantenimiento_SelectionChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.comboBoxEstatusVendido);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.dateTimePicker1);
+            this.tabPage2.Controls.Add(this.dateTimePickerProximoMantenimientoVendido);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.comboBoxMantenimientoTipoVendido);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.comboBoxVehiculosVendidoOs);
+            this.tabPage2.Controls.Add(this.dataGridViewMantenimientosVendidos);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1228, 560);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -255,6 +245,7 @@
             this.button3.TabIndex = 20;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dateTimePicker1
             // 
@@ -306,21 +297,31 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "label1";
             // 
-            // comboBoxVehiculosVendido
+            // comboBoxVehiculosVendidoOs
             // 
-            this.comboBoxVehiculosVendido.FormattingEnabled = true;
-            this.comboBoxVehiculosVendido.Location = new System.Drawing.Point(14, 70);
-            this.comboBoxVehiculosVendido.Name = "comboBoxVehiculosVendido";
-            this.comboBoxVehiculosVendido.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxVehiculosVendido.TabIndex = 13;
+            this.comboBoxVehiculosVendidoOs.FormattingEnabled = true;
+            this.comboBoxVehiculosVendidoOs.Location = new System.Drawing.Point(14, 70);
+            this.comboBoxVehiculosVendidoOs.Name = "comboBoxVehiculosVendidoOs";
+            this.comboBoxVehiculosVendidoOs.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVehiculosVendidoOs.TabIndex = 13;
             // 
-            // dataGridView1
+            // dataGridViewMantenimientosVendidos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(526, 42);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(692, 476);
-            this.dataGridView1.TabIndex = 12;
+            this.dataGridViewMantenimientosVendidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMantenimientosVendidos.Location = new System.Drawing.Point(526, 42);
+            this.dataGridViewMantenimientosVendidos.Name = "dataGridViewMantenimientosVendidos";
+            this.dataGridViewMantenimientosVendidos.Size = new System.Drawing.Size(692, 476);
+            this.dataGridViewMantenimientosVendidos.TabIndex = 12;
+            this.dataGridViewMantenimientosVendidos.SelectionChanged += new System.EventHandler(this.dataGridViewMantenimientosVendidos_SelectionChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(329, 315);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "label3";
             // 
             // MecanicoForm
             // 
@@ -334,10 +335,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMantenimiento)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMantenimiento)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMantenimientosVendidos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -349,7 +350,7 @@
         private System.Windows.Forms.DataGridView dataGridViewMantenimiento;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label vehiculo;
-        private System.Windows.Forms.ComboBox comboBoxVehiculos;
+        private System.Windows.Forms.ComboBox comboBoxVehiculosVendidos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DateTimePicker dateTimePickerProximoMantenimiento;
@@ -359,7 +360,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxEstatus;
         private System.Windows.Forms.Label labelIdMantenimiento;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxEstatusVendido;
         private System.Windows.Forms.Button button3;
@@ -369,7 +369,8 @@
         private System.Windows.Forms.ComboBox comboBoxMantenimientoTipoVendido;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBoxVehiculosVendido;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBoxVehiculosVendidoOs;
+        private System.Windows.Forms.DataGridView dataGridViewMantenimientosVendidos;
+        private System.Windows.Forms.Label label3;
     }
 }
