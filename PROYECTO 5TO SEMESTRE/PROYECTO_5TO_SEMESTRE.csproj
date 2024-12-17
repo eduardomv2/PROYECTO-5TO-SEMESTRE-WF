@@ -75,10 +75,10 @@
     <Compile Include="ContadorForm.Designer.cs">
       <DependentUpon>ContadorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GerenteForm.cs">
+    <Compile Include="Gerente\GerenteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GerenteForm.Designer.cs">
+    <Compile Include="Gerente\GerenteForm.Designer.cs">
       <DependentUpon>GerenteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="JEFE\Contratar.cs">
@@ -119,6 +119,9 @@
     <Compile Include="VENDEDOR\Vendedor.Designer.cs">
       <DependentUpon>Vendedor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Gerente\GerenteForm.resx">
+      <DependentUpon>GerenteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JEFE\Contratar.resx">
       <DependentUpon>Contratar.cs</DependentUpon>
     </EmbeddedResource>
